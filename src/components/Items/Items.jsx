@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Image, Button, Center } from "@chakra-ui/react";
+import { Box, Flex, Text, Image, Button, Center, useColorModeValue } from "@chakra-ui/react";
 
 const Items = ({
   title,
@@ -10,6 +10,9 @@ const Items = ({
   date,
   totalVisit,
 }) => {
+
+  const ftItem = useColorModeValue("gray.100", "gray.700")
+
   return (
     <Flex
       flexDirection={"column"}
@@ -19,7 +22,7 @@ const Items = ({
       w={"full"}
       overflow={"hidden"}
     >
-      <Box p={3} alignItems={"flex-start"} bg={"gray.100"} w={"full"}>
+      <Box p={3} alignItems={"flex-start"} bg={ftItem} w={"full"}>
         <Text fontSize={"sm"} fontWeight={"bold"}>
           {title}
         </Text>
@@ -44,7 +47,7 @@ const Items = ({
       <Box
         p={3}
         alignItems={"flex-start"}
-        bg={"gray.100"}
+        bg={ftItem}
         w={"full"}
       >
         <Text fontSize={"xs"}>
