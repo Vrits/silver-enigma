@@ -15,6 +15,12 @@ import {
   Stack,
   useColorMode,
   Center,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  Divider,
+  AccordionIcon,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -22,35 +28,122 @@ import {
   MoonIcon,
   SunIcon,
   LockIcon,
+  ChevronDownIcon,
 } from "@chakra-ui/icons";
 import { useState } from "react";
 import logoStmik from "../../../public/Img/small_97th.png";
 import Image from "next/image";
 
+// const Links = [
+//   "Home",
+//   "PMB Online",
+//   "STMIK Indonesia",
+//   "Daftar Prodi",
+//   "Kategori Artikel",
+//   "Hubungi Kami",
+// ];
+
 const Links = [
-  "Home",
-  "PMB Online",
-  "STMIK Indonesia",
-  "Daftar Prodi",
-  "Kategori Artikel",
-  "Hubungi Kami",
+  {
+    title: "Home",
+  },
+  {
+    title: "PMB Online",
+  },
+  {
+    title: "STMIK Indonesia",
+    subTitle: ["Sejarah STMIK Indonesia", "Visi dan Misi STMIK Indonesia"],
+  },
+  {
+    title: "Daftar Prodi",
+    subTitle: [
+      "Komputer Akuntansi",
+      "Manajemen Informatika",
+      "Sistem Informasi",
+      "Teknik Informatika",
+    ],
+  },
+  {
+    title: "Kategori Artikel",
+    subTitle: ["Kegiatan", "Pengumuman", "Dokumentasi"],
+  },
+  {
+    title: "Hubungi Kami",
+  },
 ];
 
-const NavLink = ({ children }) => (
-  <Link
-    // px={2}
-    // py={1}
-    p={3}
-    rounded={"md"}
-    transition={"ease .5s all"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
-    }}
-    href={"#"}
-  >
-    {children}
-  </Link>
+// const NavLinkMobile = ({ link }) => (
+//   <Link
+//     // px={2}
+//     // py={1}
+//     p={3}
+//     rounded={"md"}
+//     transition={"ease .5s all"}
+//     _hover={{
+//       textDecoration: "none",
+//       bg: useColorModeValue("gray.200", "gray.700"),
+//     }}
+//     href={"#"}
+//   >
+//   </Link>
+// );
+
+const NavLinkMobile = ({ link }) => (
+  <Accordion allowToggle>
+    <AccordionItem
+      px={2}
+      py={1}
+      rounded={"md"}
+      transition={"ease .5s all"}
+      // _hover={{
+      //   textDecoration: "none",
+      //   bg: useColorModeValue("gray.200", "gray.700"),
+      // }}
+      borderStyle={"none"}
+    >
+      <AccordionButton>{link.title} {link.subTitle ? (<AccordionIcon />) : ''}</AccordionButton>
+      <Divider />
+      {link.subTitle ? (
+        <>
+          {link.subTitle.map((subtitle, index) => (
+            <AccordionPanel key={subtitle+index}>
+              {subtitle}
+            </AccordionPanel>
+          ))}
+        </>
+      ) : (
+        ""
+      )}
+    </AccordionItem>
+  </Accordion>
+);
+
+const NavLink = ({ link }) => (
+  <Menu>
+    <MenuButton
+      px={2}
+      py={1}
+      rounded={"md"}
+      transition={"ease .5s all"}
+      _hover={{
+        textDecoration: "none",
+        bg: useColorModeValue("gray.200", "gray.700"),
+      }}
+    >
+      {link.title}
+      {link.subTitle ? <ChevronDownIcon /> : ""}
+    </MenuButton>
+
+    {link.subTitle ? (
+      <MenuList>
+        {link.subTitle.map((subtitle, index) => (
+          <MenuItem key={subtitle + index}>{subtitle}</MenuItem>
+        ))}
+      </MenuList>
+    ) : (
+      ""
+    )}
+  </Menu>
 );
 
 export default function Navbar({ children }) {
@@ -84,7 +177,7 @@ export default function Navbar({ children }) {
               display={{ base: "none", md: "flex" }}
             >
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <NavLink key={link.title} link={link} />
               ))}
             </HStack>
           </HStack>
@@ -125,7 +218,7 @@ export default function Navbar({ children }) {
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <NavLinkMobile key={link.title} link={link} />
               ))}
             </Stack>
           </Box>
