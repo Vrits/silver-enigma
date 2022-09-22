@@ -33,6 +33,7 @@ import {
 import { useState } from "react";
 import logoStmik from "../../../public/Img/small_97th.png";
 import Image from "next/image";
+import Sidebar from "../Sidebar/Sidebar";
 
 // const Links = [
 //   "Home",
@@ -225,7 +226,11 @@ export default function Navbar({ children }) {
         ) : null}
       </Box>
 
-      <Box p={4}>{children}</Box>
+      <Box p={4} display={'flex'} flexDirection={['column','column', 'row']}>
+        {children}
+        <Sidebar />
+      </Box>
+
     </>
   );
 }
