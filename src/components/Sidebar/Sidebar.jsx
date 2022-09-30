@@ -3,7 +3,7 @@ import SideItem from "./Sideitem";
 
 const Sidebar = () => {
   return (
-    <VStack spacing={5} w={"400px"}>
+    <VStack spacing={5} w={["full", "full", "400px"]} my={["2.5", "2.5", "0"]}>
       <SideItem
         title={"Kategori Artikel"}
         subTitle={["Kegiatan", "Pengumuman", "Dokumentasi"]}

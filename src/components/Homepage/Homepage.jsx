@@ -42,7 +42,11 @@ const DUMMY_DATA = [
 
 const Homepage = () => {
   return (
-    <VStack w={"700px"} spacing={'4'}>
+    <VStack maxW={['full', 'full',"700px"]} 
+    spacing={'4'}
+    // p={'0'}
+    // m={'0'}
+    >
       {DUMMY_DATA.map((item, index) => (
         <Items
           key={`${item}+${index}`}

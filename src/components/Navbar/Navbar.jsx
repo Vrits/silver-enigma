@@ -2,14 +2,12 @@ import {
   Box,
   Flex,
   HStack,
-  Link,
   IconButton,
   Button,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  MenuDivider,
   useDisclosure,
   useColorModeValue,
   Stack,
@@ -34,15 +32,6 @@ import { useState } from "react";
 import logoStmik from "../../../public/Img/small_97th.png";
 import Image from "next/image";
 import Sidebar from "../Sidebar/Sidebar";
-
-// const Links = [
-//   "Home",
-//   "PMB Online",
-//   "STMIK Indonesia",
-//   "Daftar Prodi",
-//   "Kategori Artikel",
-//   "Hubungi Kami",
-// ];
 
 const Links = [
   {
@@ -73,22 +62,6 @@ const Links = [
   },
 ];
 
-// const NavLinkMobile = ({ link }) => (
-//   <Link
-//     // px={2}
-//     // py={1}
-//     p={3}
-//     rounded={"md"}
-//     transition={"ease .5s all"}
-//     _hover={{
-//       textDecoration: "none",
-//       bg: useColorModeValue("gray.200", "gray.700"),
-//     }}
-//     href={"#"}
-//   >
-//   </Link>
-// );
-
 const NavLinkMobile = ({ link }) => (
   <Accordion allowToggle>
     <AccordionItem
@@ -102,14 +75,14 @@ const NavLinkMobile = ({ link }) => (
       // }}
       borderStyle={"none"}
     >
-      <AccordionButton>{link.title} {link.subTitle ? (<AccordionIcon />) : ''}</AccordionButton>
+      <AccordionButton>
+        {link.title} {link.subTitle ? <AccordionIcon /> : ""}
+      </AccordionButton>
       <Divider />
       {link.subTitle ? (
         <>
           {link.subTitle.map((subtitle, index) => (
-            <AccordionPanel key={subtitle+index}>
-              {subtitle}
-            </AccordionPanel>
+            <AccordionPanel key={subtitle + index}>{subtitle}</AccordionPanel>
           ))}
         </>
       ) : (
@@ -226,11 +199,20 @@ export default function Navbar({ children }) {
         ) : null}
       </Box>
 
-      <Box p={4} display={'flex'} flexDirection={['column','column', 'row']}>
+      <Box
+        p={4}
+        display={"flex"}
+        
+        // justifyItems={"center"}
+        // alignItems={['center', 'center', 'flex-start']}
+        // justifyContent={'space-between'}
+        // alignContent={'space-between'}
+
+        flexDirection={["column", "column", "row"]}
+      >
         {children}
         <Sidebar />
       </Box>
-
     </>
   );
 }

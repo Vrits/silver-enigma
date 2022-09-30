@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Image, Button, Center, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, Text, Image, Button, useColorModeValue } from "@chakra-ui/react";
 
 const Items = ({
   title,
